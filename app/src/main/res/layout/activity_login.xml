@@ -10,7 +10,13 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:src="@drawable/fondo"/>
+        android:src="@drawable/fondo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:layout_width="140dp"
@@ -74,10 +80,10 @@
         android:id="@+id/textInputLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="72dp"
-        android:hint="PASSWORD"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
+        android:layout_marginBottom="20dp"
+        android:hint="PASSWORD"
         android:textColorHint="@color/textColorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
@@ -97,19 +103,20 @@
         android:id="@+id/button"
         android:layout_width="222dp"
         android:layout_height="47dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="24dp"
         android:background="@color/buttonColor"
         android:text="SIGN IN"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="40dp"
         android:text="or use one of your social profiles"
         android:textColor="@color/textColorSecondary"
         app:layout_constraintBottom_toTopOf="@+id/button3"
@@ -120,32 +127,59 @@
         android:id="@+id/button3"
         android:layout_width="125dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="56dp"
+        android:layout_marginBottom="32dp"
         android:background="@color/googleButtonColor"
         android:drawableStart="@drawable/google"
         android:paddingStart="20px"
         android:text="Google"
         android:textColor="@color/white"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintHorizontal_bias="0.181"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="125dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="56dp"
+        android:layout_marginBottom="33dp"
         android:background="@color/facebookButtonColor"
         android:drawableStart="@drawable/facebook"
         android:paddingStart="20px"
         android:text="Facebook"
         android:textColor="@color/white"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.776"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:text="Forgot Password?"
+        android:textColor="@color/textColorSecondary"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintHorizontal_bias="0.185"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:text="Sign Up"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.82"
         app:layout_constraintStart_toStartOf="parent" />
 
 

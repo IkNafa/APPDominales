@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <solid android:color="#545454"/>
+            <corners android:radius="30dp"/>
+        </shape>
+    </item>
+    
+    <item
+
+        android:width="450dp"
+        android:height="220dp"
+        android:left="-40dp"
+        android:top="-10dp">
+        <bitmap
+            android:gravity="bottom|right"
+
+            android:src="@drawable/fondorutina" />
+    </item>
+
+
+</layer-list>

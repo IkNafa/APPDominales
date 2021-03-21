@@ -11,5 +11,8 @@
     <color name="white">#ffffff</color>
     <color name="buttonColor">#00a4d3</color>
     <color name="googleButtonColor">#abb5be</color>
-    <color name="facebookButtonColor">#3b5998</color>
+    <color name="facebookButtonColor">#3a5897</color>
+
+    <color name="menuColor">#444444</color>
+    <color name="menuNameColor">#00c8f8</color>
 </resources>

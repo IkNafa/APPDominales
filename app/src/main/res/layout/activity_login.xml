@@ -8,8 +8,11 @@
     tools:context=".Login">
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:scaleType="centerCrop"
+
         android:src="@drawable/fondo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,9 +24,9 @@
     <ImageView
         android:layout_width="140dp"
         android:layout_height="140dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="8dp"
         android:src="@drawable/logo"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
@@ -32,6 +35,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="8dp"
         android:text="LOG IN"
         android:textColor="@color/white"
@@ -39,8 +43,9 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.075"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.069"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <TextView
         android:id="@+id/textView2"
@@ -59,13 +64,14 @@
         android:id="@+id/textInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="36dp"
         android:hint="EMAIL"
         android:textColorHint="@color/textColorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -104,7 +110,7 @@
         android:layout_width="222dp"
         android:layout_height="47dp"
         android:layout_marginBottom="24dp"
-        android:background="@color/buttonColor"
+        android:background="@drawable/roundedbutton"
         android:text="SIGN IN"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/textView3"
@@ -116,11 +122,12 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="28dp"
         android:text="or use one of your social profiles"
         android:textColor="@color/textColorSecondary"
         app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -128,7 +135,7 @@
         android:layout_width="125dp"
         android:layout_height="50dp"
         android:layout_marginBottom="32dp"
-        android:background="@color/googleButtonColor"
+        android:background="@drawable/googlebutton"
         android:drawableStart="@drawable/google"
         android:paddingStart="20px"
         android:text="Google"
@@ -140,14 +147,15 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnFacebook"
         android:layout_width="125dp"
         android:layout_height="50dp"
         android:layout_marginBottom="33dp"
-        android:background="@color/facebookButtonColor"
+        android:background="@drawable/facebookbutton"
         android:drawableStart="@drawable/facebook"
         android:paddingStart="20px"
         android:text="Facebook"
+        android:onClick="openActivity"
         android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView5"
@@ -159,7 +167,7 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="50dp"
         android:text="Forgot Password?"
         android:textColor="@color/textColorSecondary"
         android:textSize="16sp"
@@ -172,7 +180,7 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="50dp"
         android:text="Sign Up"
         android:textColor="@color/textColorPrimary"
         android:textSize="16sp"

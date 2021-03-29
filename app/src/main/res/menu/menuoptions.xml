@@ -4,9 +4,9 @@
     tools:showIn="navigation_view">
 
     <item
-        android:id="@+id/planificador"
+        android:id="@+id/perfil"
         android:icon="@drawable/ic_assignment"
-        android:title="Planificador"/>
+        android:title="Perfil"/>
 
     <item
         android:id="@+id/stats"

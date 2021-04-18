@@ -5,12 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class Planificador extends AppCompatActivity {
 
@@ -21,6 +24,16 @@ public class Planificador extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_planificador);
+
+        ToolBar toolBar = (ToolBar) getSupportFragmentManager().findFragmentById(R.id.toolbar);
+        toolBar.setMenuButtonOnClick(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Intent i = new Intent(Planificador.this, Login.class);
+                startActivity(i);
+            }
+        });
 
         recyclerView = findViewById(R.id.reciclerview);
         ElAdaptadorRecycler elAdaptadorRecycler = new ElAdaptadorRecycler(nombres);

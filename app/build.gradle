@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 30
@@ -39,5 +40,9 @@ dependencies {
     implementation 'androidx.work:work-runtime:2.5.0'
     implementation('com.googlecode.json-simple:json-simple:1.1.1')
             { exclude group: 'junit', module: 'junit' }
+    implementation platform('com.google.firebase:firebase-bom:26.7.0')
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'
+
 
 }

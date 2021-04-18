@@ -141,6 +141,7 @@
         android:drawableStart="@drawable/google"
         android:paddingStart="20px"
         android:text="Google"
+        android:onClick="loginGoogle"
         android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView4"

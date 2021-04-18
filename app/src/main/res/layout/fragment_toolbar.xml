@@ -8,7 +8,7 @@
     android:background="@color/colorPrimary">
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/menuButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@android:color/transparent"

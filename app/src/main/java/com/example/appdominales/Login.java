@@ -88,6 +88,10 @@ public class Login extends AppCompatActivity {
         startActivityForResult(cliente.getSignInIntent(), 100);
     }
 
+    public void loginFacebook(View v){
+
+    }
+
     private void firebaseAuthWithGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         mAuth.signInWithCredential(credential)

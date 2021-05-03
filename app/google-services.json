@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1088190513913",
+    "project_id": "appdominales-c39aa",
+    "storage_bucket": "appdominales-c39aa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1088190513913:android:b3c03eced94004e4349828",
+        "android_client_info": {
+          "package_name": "com.example.appdominales"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1088190513913-c4t5qc9afk12bqije2aj3h548vap01je.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2qGJI4Hi5_IRIqsdIn5T7bfDA4hWXiVE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1088190513913-c4t5qc9afk12bqije2aj3h548vap01je.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

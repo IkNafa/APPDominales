@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipToPadding="false"
+    android:paddingVertical="10dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp">
+
+    <TextView
+        android:id="@+id/nombreMensaje"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="4dp"
+        android:text="Iker Nafarrate"
+        android:textAlignment="viewStart"
+        android:textAllCaps="false"
+        android:textColor="#33E1FF"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/mensajeChat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nombreMensaje"
+        android:layout_alignLeft="@id/nombreMensaje"
+        android:background="@drawable/chat_message"
+        android:elevation="5dp"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="12dp"
+        android:text="DAS"
+        android:textColor="#ffffff"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/fechaMensaje"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mensajeChat"
+        android:layout_alignRight="@id/mensajeChat"
+        android:layout_alignParentStart="false"
+        android:paddingTop="4dp"
+        android:text="02 my"
+        android:textAlignment="textEnd"
+        android:textColor="#33E1FF"
+        android:textSize="12sp" />
+</RelativeLayout>

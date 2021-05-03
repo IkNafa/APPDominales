@@ -4,14 +4,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.appdominales.Controller.GestorDB;
+import com.example.appdominales.Controller.GestorUsuarios;
 import com.example.appdominales.Model.DBResultCallBack;
+import com.example.appdominales.Model.OdooResult;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -20,6 +24,7 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,33 +33,42 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 public class Login extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
+
+    private TextInputLayout emailTextInput;
+    private TextInputLayout passTextInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Initialize Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
+        emailTextInput = findViewById(R.id.emailTextInput);
+        passTextInput = findViewById(R.id.passTextInput);
 
-        /*
-        GestorDB.getGesorDB().login(this, "admin", "admin", new DBResultCallBack() {
-            @Override
-            public void onGetResult(String result) {
-                Log.i("TOKEN", result);
-            }
-        });*/
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            Intent i = new Intent(this, Planificador.class);
-            startActivity(i);
-            finish();
+
+        SharedPreferences preferences = getSharedPreferences("appdominales", Context.MODE_PRIVATE);
+        String session_id = preferences.getString("session_id",null);
+        long current_id = preferences.getLong("user_id",-1);
+        if(session_id != null && !session_id.isEmpty() && current_id != -1){
+
+            Log.i("DB","Coger datos del usuario");
+            GestorDB.getGesorDB().getCurrentUserData(this, new DBResultCallBack() {
+                @Override
+                public void onGetResult(String result) {
+                    if(result.equals("OK")){
+                        Intent i = new Intent(Login.this, Planificador.class);
+                        startActivity(i);
+                        finish();
+                    }
+                }
+            });
+
+
         }
     }
 
@@ -64,7 +78,7 @@ public class Login extends AppCompatActivity {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle(account.getIdToken());
+                login(account.getEmail(),account.getIdToken(), true);
             } catch (ApiException e) {
                 e.printStackTrace();
             }
@@ -88,32 +102,48 @@ public class Login extends AppCompatActivity {
         startActivityForResult(cliente.getSignInIntent(), 100);
     }
 
-    public void loginFacebook(View v){
+
+
+
+    public void loginButton(View v){
+        String email = emailTextInput.getEditText().getText().toString();
+        String pass = passTextInput.getEditText().getText().toString();
+
+        login(email,pass, false);
 
     }
 
-    private void firebaseAuthWithGoogle(String idToken) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("TAG", "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            Intent i = new Intent(Login.this, Planificador.class);
-                            startActivity(i);
-                            finish();
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w("TAG", "signInWithCredential:failure", task.getException());
+    private void login(String email, String pass, boolean provider){
+        DBResultCallBack dbResultCallBack = new DBResultCallBack() {
+            @Override
+            public void onGetResult(String result) {
+                if(result.equals(OdooResult.ACCESS_DENIED.toString())){
+                    Toast.makeText(Login.this, "Usuario o contraseña incorrecta", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
+                if(result.equalsIgnoreCase("OK")){
+                    Intent i = new Intent(Login.this, Planificador.class);
+                    startActivity(i);
+                    finish();
+                }
+            }
+        };
 
-                        }
-
-                        // ...
-                    }
-                });
+        if (provider) {
+            odooAuthWithGoogle(email, pass, dbResultCallBack);
+        } else {
+            odooLogin(email, pass, dbResultCallBack);
+        }
     }
+
+    private void odooLogin(String email, String pass, DBResultCallBack dbResultCallBack){
+        GestorDB.getGesorDB().loginWithEmail(this, email, pass, dbResultCallBack);
+    }
+
+    private void odooAuthWithGoogle(String email, String pass, DBResultCallBack dbResultCallBack){
+        GestorDB.getGesorDB().loginWithProvider(this, email, pass, dbResultCallBack);
+    }
+
+
 }

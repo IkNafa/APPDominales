@@ -19,6 +19,11 @@
         android:title="Clientes"/>
 
     <item
+        android:id="@+id/entrenador"
+        android:icon="@drawable/ic_account_box"
+        android:title="Entrenador"/>
+
+    <item
         android:id="@+id/ejercicios"
         android:icon="@drawable/ic_fitness_center"
         android:title="Ejercicios"/>

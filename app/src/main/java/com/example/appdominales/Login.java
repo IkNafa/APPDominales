@@ -78,7 +78,7 @@ public class Login extends AppCompatActivity {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                login(account.getEmail(),account.getIdToken(), true);
+                login(account.getDisplayName(), account.getEmail(),account.getIdToken(), true);
             } catch (ApiException e) {
                 e.printStackTrace();
             }
@@ -87,8 +87,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void openActivity(View v){
-        Intent i = new Intent(this, Planificador.class);
-        startActivity(i);
+        Toast.makeText(this, "No disponible aún", Toast.LENGTH_SHORT).show();
     }
 
     public void loginGoogle(View v){
@@ -102,18 +101,21 @@ public class Login extends AppCompatActivity {
         startActivityForResult(cliente.getSignInIntent(), 100);
     }
 
-
+    public void signUp(View v){
+        Intent i = new Intent(this, Register.class);
+        startActivity(i);
+    }
 
 
     public void loginButton(View v){
         String email = emailTextInput.getEditText().getText().toString();
         String pass = passTextInput.getEditText().getText().toString();
 
-        login(email,pass, false);
+        login(null, email,pass, false);
 
     }
 
-    private void login(String email, String pass, boolean provider){
+    private void login(String name, String email, String pass, boolean provider){
         DBResultCallBack dbResultCallBack = new DBResultCallBack() {
             @Override
             public void onGetResult(String result) {
@@ -131,7 +133,7 @@ public class Login extends AppCompatActivity {
         };
 
         if (provider) {
-            odooAuthWithGoogle(email, pass, dbResultCallBack);
+            odooAuthWithGoogle(name, email, pass, dbResultCallBack);
         } else {
             odooLogin(email, pass, dbResultCallBack);
         }
@@ -141,8 +143,8 @@ public class Login extends AppCompatActivity {
         GestorDB.getGesorDB().loginWithEmail(this, email, pass, dbResultCallBack);
     }
 
-    private void odooAuthWithGoogle(String email, String pass, DBResultCallBack dbResultCallBack){
-        GestorDB.getGesorDB().loginWithProvider(this, email, pass, dbResultCallBack);
+    private void odooAuthWithGoogle(String name, String email, String pass, DBResultCallBack dbResultCallBack){
+        GestorDB.getGesorDB().loginWithProvider(this, name, email, pass, dbResultCallBack);
     }
 
 

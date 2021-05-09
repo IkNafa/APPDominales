@@ -1,7 +1,5 @@
 package com.example.appdominales.Model;
 
-import com.example.appdominales.Controller.ExerciseSet;
-
 import java.util.ArrayList;
 
 public class Exercise {

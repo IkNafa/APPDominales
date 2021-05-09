@@ -16,6 +16,7 @@ import androidx.work.WorkManager;
 import com.example.appdominales.Model.ChatMessage;
 import com.example.appdominales.Model.DBResultCallBack;
 import com.example.appdominales.Model.Exercise;
+import com.example.appdominales.Model.ExerciseSet;
 import com.example.appdominales.Model.Measure;
 import com.example.appdominales.Model.OdooResult;
 import com.example.appdominales.Model.Routine;
@@ -86,7 +87,7 @@ public class GestorDB {
         });
     }
 
-    public void loginWithProvider(final Activity pActivity, String username, String pass, final DBResultCallBack dbResultCallBack){
+    public void loginWithProvider(final Activity pActivity, final String name, final String username, final String pass, final DBResultCallBack dbResultCallBack){
         loginWithEmail(pActivity, username, pass, new DBResultCallBack() {
             @Override
             public void onGetResult(String result) {
@@ -97,8 +98,14 @@ public class GestorDB {
                     return;
                 }
                 if(result.equals(OdooResult.ACCESS_DENIED.toString())){
-                    //REGISTRAR
-                    throw new UnsupportedOperationException();
+                    GestorDB.getGesorDB().registerUser(pActivity, name, username, pass, new DBResultCallBack() {
+                        @Override
+                        public void onGetResult(String result) {
+                            if(result.equals("OK")){
+                                loginWithEmail(pActivity, username, pass, dbResultCallBack);
+                            }
+                        }
+                    });
                 }
             }
         });
@@ -161,6 +168,37 @@ public class GestorDB {
 
             }
         });
+
+    }
+
+    public void registerUser(Activity pActivity, String name, String email, String password, final DBResultCallBack dbResultCallBack){
+
+        String url = "/api/users/register";
+        String method = "POST";
+
+        HashMap<String,String> params = new HashMap<>();
+        params.put("name", name);
+        params.put("email", email);
+        params.put("password", password);
+
+        JSONObject jsonParams = new JSONObject(params);
+
+        odooRequest(pActivity, method, url, jsonParams, new DBResultCallBack() {
+            @Override
+            public void onGetResult(String result) {
+                JSONParser parser = new JSONParser();
+                try {
+                    JSONObject jsonObject = (JSONObject) parser.parse(result);
+                    String strResult = (String) jsonObject.get("result");
+                    dbResultCallBack.onGetResult(strResult);
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
 
     }
 

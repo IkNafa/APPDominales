@@ -1,4 +1,4 @@
-package com.example.appdominales.Controller;
+package com.example.appdominales.Model;
 
 public class ExerciseSet {
 
